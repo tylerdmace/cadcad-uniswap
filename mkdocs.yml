@@ -1,9 +1,10 @@
 nav:
-    - index.md
-    - "Genesis State": state.md
+    - Smartpaper: index.md
+    - Genesis State: state.md
     - params.md
     - updates.md
     - config.md
-    - simple-analysis.ipynb
+    - "Notebook: Simple": simple-analysis.ipynb
 plugins:
-    - mkdocs-jupyter
+    - mkdocs-jupyter:
+        ignore_h1_titles: True
