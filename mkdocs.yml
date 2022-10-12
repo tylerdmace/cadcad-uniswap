@@ -1,5 +1,5 @@
 nav:
-    - Smartpaper: index.md
+    - Smart Paper: index.md
     - Implementation:
         - Genesis State: state.md
         - params.md
@@ -7,6 +7,8 @@ nav:
         - config.md
     - Notebooks:
         - Simple Analysis: simple-analysis.ipynb
+    - Additional Resources:
+        - Uniswap Whitepaper (v3): https://uniswap.org/whitepaper-v3.pdf
 plugins:
     - mkdocs-jupyter:
         ignore_h1_titles: True
