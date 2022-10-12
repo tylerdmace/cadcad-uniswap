@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
     runSimulationButton.addEventListener('click', runSimulation);
     
     let river = 'all';
-    let reserve = '30';
+    let reserve = '10';
     
     function handleReserveChange(event) {
         reserve = event.target.value;
