@@ -7,10 +7,23 @@ This model is based on the work of several Uniswap models created over the last 
 ## Implementation Details
 This is a section where we can examine specific implementation details in greater detail and talk about both the *why* and *how*.
 
-- [Genesis State](state.md)
-- [Parameters](params.md)
-- [Policies & State Update Functions](updates.md)
-- [Configuration](config.md)
+### Initial State
+```python
+---8<--- "model/state.py"
+```
+
+### Parameters
+```python
+---8<--- "model/params.py"
+```
+
+### Policies & State Update Functions
+See implementation details [here](updates.md).
+
+### Configuration
+```python
+---8<--- "model/config.py"
+```
 
 ## Analysis
 <div id="analysis">

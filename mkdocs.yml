@@ -1,7 +1,7 @@
 nav:
     - Smart Paper: index.md
     - Implementation:
-        - Genesis State: state.md
+        - state.md
         - params.md
         - updates.md
         - config.md
