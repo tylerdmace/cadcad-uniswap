@@ -1,8 +1,6 @@
-genesis_state = {
-    'fee_numerator': [997, 995],
-    'fee_denominator': [1000],
-    'uniswap_events': [],
-    'fix_cost': [-1],
-    'retail_precision': [-1],
-    'retail_tolerance': [-1]
+genesis_states = {
+    'DAI_balance': 5900000000000000000000,
+    'ETH_balance': 30000000000000000000,
+    'UNI_supply': 30000000000000000000,
+    'price_ratio': 0
 }
