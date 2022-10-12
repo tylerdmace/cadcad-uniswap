@@ -51,7 +51,7 @@ def plot_agenttype_return(plots_df,fees):
         ax.legend(loc='upper left')
 
 
-    fig.set_facecolor('white')
+    #fig.set_facecolor('white')
     fig.tight_layout(pad=4.0)
     fig.show()
     return 
