@@ -12,3 +12,8 @@ nav:
 plugins:
     - mkdocs-jupyter:
         ignore_h1_titles: True
+extra_css:
+    - css/analysis.css
+extra_javascript:
+    - js/d3@7.js
+    - js/analysis.js
