@@ -4,7 +4,9 @@
 ## Limitations & Constraints
 This model is based on the work of several Uniswap models created over the last few years by [BlockScience](https://block.science) data scientists. Agent behavior is not simulated and as such this model will not provide insights on agent reactions to pool state or changes in policy.
 
-## Implementation
+## Implementation Details
+This is a section where we can examine specific implementation details in greater detail and talk about the *why* and *how* both.
+
 - [Genesis State](state.md)
 - [Parameters](params.md)
 - [Policies & State Update Functions](updates.md)
@@ -17,13 +19,13 @@ This model is based on the work of several Uniswap models created over the last 
             <span>Currency Selection:</span>
             <br />
             <input id="river-selection-blue" name="river-selection" value="blue" type="radio" class="radio">
-            <label for="river-selection-blue">ETH</label>
+            <label for="river-selection-blue">Ethereum</label>
             <br />
             <input id="river-selection-white" name="river-selection" value="white" type="radio" class="radio">
-            <label for="river-selection-white">DAI</label>
+            <label for="river-selection-white">Dai (</label>
             <br />
             <input id="river-selection-atbara" name="river-selection" value="atbara" type="radio" class="radio">
-            <label for="river-selection-atbara">UNI</label>
+            <label for="river-selection-atbara">Uniswap</label>
             <br />
             <input id="river-selection-all" name="river-selection" value="all" type="radio" class="radio">
             <label for="river-selection-all">All</label>
