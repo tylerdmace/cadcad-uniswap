@@ -19,13 +19,13 @@ This is a section where we can examine specific implementation details in greate
             <span>Currency Selection:</span>
             <br />
             <input id="river-selection-blue" name="river-selection" value="blue" type="radio" class="radio">
-            <label for="river-selection-blue">Ethereum</label>
+            <label for="river-selection-blue">Ethereum (ETH)</label>
             <br />
             <input id="river-selection-white" name="river-selection" value="white" type="radio" class="radio">
-            <label for="river-selection-white">Dai (</label>
+            <label for="river-selection-white">Dai (DAI)</label>
             <br />
             <input id="river-selection-atbara" name="river-selection" value="atbara" type="radio" class="radio">
-            <label for="river-selection-atbara">Uniswap</label>
+            <label for="river-selection-atbara">Uniswap (UNI)</label>
             <br />
             <input id="river-selection-all" name="river-selection" value="all" type="radio" class="radio">
             <label for="river-selection-all">All</label>
