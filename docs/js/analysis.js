@@ -93,7 +93,7 @@ window.addEventListener('load', () => {
                 .attr("dy", ".75em")
                 .attr("transform", "rotate(-90)")
                 .attr("fill", "#FFCD00")
-                .text("flow rate");
+                .text("");
         });
     }
     
@@ -162,7 +162,7 @@ window.addEventListener('load', () => {
                 .attr("dy", ".75em")
                 .attr("transform", "rotate(-90)")
                 .attr("fill", "#FFCD00")
-                .text("reservoir level");
+                .text("");
         });
     }
     

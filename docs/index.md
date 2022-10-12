@@ -14,22 +14,22 @@ This model is based on the work of several Uniswap models created over the last 
 <div id="analysis">
     <div id="controls">
         <div>
-            <span>River Selection:</span>
+            <span>Currency Selection:</span>
             <br />
             <input id="river-selection-blue" name="river-selection" value="blue" type="radio" class="radio">
-            <label for="river-selection-blue">Blue Nile</label>
+            <label for="river-selection-blue">ETH</label>
             <br />
             <input id="river-selection-white" name="river-selection" value="white" type="radio" class="radio">
-            <label for="river-selection-white">White Nile</label>
+            <label for="river-selection-white">DAI</label>
             <br />
             <input id="river-selection-atbara" name="river-selection" value="atbara" type="radio" class="radio">
-            <label for="river-selection-atbara">Atbara</label>
+            <label for="river-selection-atbara">UNI</label>
             <br />
             <input id="river-selection-all" name="river-selection" value="all" type="radio" class="radio">
-            <label for="river-selection-all">All Rivers</label>
+            <label for="river-selection-all">All</label>
         </div>
         <div>
-            <label for="reserve-selection">Reserve Percentage (current: <span id="reserve-selection-details"></span>):</label>
+            <label for="reserve-selection">Fee Percentage (current: <span id="reserve-selection-details"></span>):</label>
             <input id="reserve-selection" type="range" min="0" max="100" step="10" class="slider">
             <br />
             <br />
