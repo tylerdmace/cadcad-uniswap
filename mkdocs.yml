@@ -1,10 +1,12 @@
 nav:
     - Smartpaper: index.md
-    - Genesis State: state.md
-    - params.md
-    - updates.md
-    - config.md
-    - "Notebook: Simple": simple-analysis.ipynb
+    - Implementation:
+        - Genesis State: state.md
+        - params.md
+        - updates.md
+        - config.md
+    - Notebooks:
+        - Simple Analysis: simple-analysis.ipynb
 plugins:
     - mkdocs-jupyter:
         ignore_h1_titles: True
