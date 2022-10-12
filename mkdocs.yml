@@ -1,2 +1,5 @@
 nav:
     - index.md
+    - analysis.ipynb
+plugins:
+    - mkdocs-jupyter
