@@ -1,5 +1,9 @@
 nav:
     - index.md
-    - analysis.ipynb
+    - "Genesis State": state.md
+    - params.md
+    - updates.md
+    - config.md
+    - simple-analysis.ipynb
 plugins:
     - mkdocs-jupyter
