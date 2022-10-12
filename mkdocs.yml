@@ -9,6 +9,7 @@ nav:
         - Simple Analysis: simple-analysis.ipynb
     - Additional Resources:
         - Uniswap Whitepaper (v3): https://uniswap.org/whitepaper-v3.pdf
+        - Model Repository: https://github.com/tylerdmace/cadcad-uniswap
 plugins:
     - mkdocs-jupyter:
         ignore_h1_titles: True
