@@ -5,7 +5,7 @@
 This model is based on the work of several Uniswap models created over the last few years by [BlockScience](https://block.science) data scientists. Agent behavior is not simulated and as such this model will not provide insights on agent reactions to pool state or changes in policy.
 
 ## Implementation Details
-This is a section where we can examine specific implementation details in greater detail and talk about the *why* and *how* both.
+This is a section where we can examine specific implementation details in greater detail and talk about both the *why* and *how*.
 
 - [Genesis State](state.md)
 - [Parameters](params.md)
