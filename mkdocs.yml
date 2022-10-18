@@ -7,6 +7,7 @@ nav:
         - config.md
     - Notebooks:
         - Simple Analysis: simple-analysis.ipynb
+        - Extended Analysis: extended-analysis.ipynb
     - Additional Resources:
         - Uniswap Whitepaper (v3): https://uniswap.org/whitepaper-v3.pdf
         - Model Repository: https://github.com/tylerdmace/cadcad-uniswap
