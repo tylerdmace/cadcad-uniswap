@@ -60,7 +60,7 @@ Another important note is that higher fee values don't necessarily result in hig
 
 Finally, it's important to state that retail_tolerance and retail_precision are both **arbitrary parameters** over which there is **no control in a real system**, created to possibilitate the development of the agents' behaviors and the trade classification mechanism and, as shown above, to allow hypotheses validation through parameter sweeping.
     <div id="plots">
-        <div id="river-flow-rate"></div>
+        <div id="river-flow-rate"></div><br />
         This script returns a dataframe containing the historic return of three different strategies: **50/50 hodler**, **ETH hodler** and **UNI hodler** (liquidity provider). With these data, it is possible to use cadCAD's parameter sweeping feature to validate hypotheses according to possible scenarios for Uniswap. The parameters swept are described below:
 - **retail_precision**: This model assumes two classes of users: arbitrageurs and retail traders. Swaps observed in the historical data will be replayed against the model or not depending on the state of the model and individual policies implemented for each one of the user classes. Therefore, swaps must be classified as originating from one of the two classes of users. We apply a simple heuristic based on the precision of the values involved in the trade. If either the precision of the input or the output of a swap are less than or equal to `retail_precision`, the swap is classified as a retail trade. For example, let's consider a swap with an eth_delta of `-0.005542280351005221` (precision 18) and a token_delta of `1.529800000000000000` (precision 4). 
   * If `retail_precision >= 4`, then this swap would be classified as a retail trade
@@ -69,6 +69,7 @@ Finally, it's important to state that retail_tolerance and retail_precision are 
 - **retail_tolerance**: In order for swaps observed in the historical data that are classified as retail trades to be replayed against the model, the effective price paid by the simulated agent must not be higher than the price observed in the historical data, factored by the `retail_tolerance` parameter. In other words, this determines the retail trader's tolerance (in %) to receive less money from an exchange made. For example, if in a certain exchange in Uniswap's real history **1 ETH** was sold for **250 DAI** and retail_tolerance is set at **0.05**, the model will replay the trade (sell 1 ETH) if given the state of the model the trader receives **237.5 DAI or more** for it. Otherwise, the trade will be disregarded in the simulation.
 
 Now, let's plot the calculated returns to analyze the sensitivity of the model to the parameters. The following script shows the plots dynamically as the number of parameters changes. The simulation made used two fee (**0.3% and 0.5%**), two retail_tolerance (**0.05% and 2.5%**) and two retail_precision (**3 and 15**) values.
+        <br />
         <div id="reservoir-level"></div>
     </div>
 </div>
