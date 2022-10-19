@@ -19,3 +19,4 @@ extra_css:
 extra_javascript:
     - js/d3@7.js
     - js/analysis.js
+    - https://raw.githubusercontent.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js
