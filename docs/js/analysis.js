@@ -67,7 +67,7 @@ window.addEventListener('load', () => {
           const n = categories.length
 
           // Compute the mean of each group
-          allMeans = []
+          let allMeans = []
           for (i in categories){
             currentGroup = categories[i]
             mean = d3.mean(data, function(d) { return +d[currentGroup] })
