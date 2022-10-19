@@ -100,5 +100,4 @@
 
 .md-container, .md-main {
     flex-basis: content;
-    flex-grow: unset;
 }
