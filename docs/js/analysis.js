@@ -32,12 +32,191 @@ window.addEventListener('load', () => {
         renderRiverFlowRate(river);
         renderReservoirLevel(reserve);
         renderScatterPlot();
+        renderDonut();
+        renderBoxplot();
     }
     
     function setDefaults() {
         reserveSelection.value = reserve;
         allSelection.checked = true;
         reserveSelectionDetails.innerHTML = reserve;
+    }
+    
+    function renderBoxplot() {
+        // set the dimensions and margins of the graph
+        var margin = {top: 10, right: 30, bottom: 30, left: 40},
+            width = 460 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        // append the svg object to the body of the page
+        var svg = d3.select("#boxplot")
+          .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+
+        // Read the data and compute summary statistics for each specie
+        d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function(data) {
+
+          // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
+          var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+            .key(function(d) { return d.Species;})
+            .rollup(function(d) {
+              q1 = d3.quantile(d.map(function(g) { return g.Sepal_Length;}).sort(d3.ascending),.25)
+              median = d3.quantile(d.map(function(g) { return g.Sepal_Length;}).sort(d3.ascending),.5)
+              q3 = d3.quantile(d.map(function(g) { return g.Sepal_Length;}).sort(d3.ascending),.75)
+              interQuantileRange = q3 - q1
+              min = q1 - 1.5 * interQuantileRange
+              max = q3 + 1.5 * interQuantileRange
+              return({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: min, max: max})
+            })
+            .entries(data)
+
+          // Show the X scale
+          var x = d3.scaleBand()
+            .range([ 0, width ])
+            .domain(["setosa", "versicolor", "virginica"])
+            .paddingInner(1)
+            .paddingOuter(.5)
+          svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+
+          // Show the Y scale
+          var y = d3.scaleLinear()
+            .domain([3,9])
+            .range([height, 0])
+          svg.append("g").call(d3.axisLeft(y))
+
+          // Show the main vertical line
+          svg
+            .selectAll("vertLines")
+            .data(sumstat)
+            .enter()
+            .append("line")
+              .attr("x1", function(d){return(x(d.key))})
+              .attr("x2", function(d){return(x(d.key))})
+              .attr("y1", function(d){return(y(d.value.min))})
+              .attr("y2", function(d){return(y(d.value.max))})
+              .attr("stroke", "black")
+              .style("width", 40)
+
+          // rectangle for the main box
+          var boxWidth = 100
+          svg
+            .selectAll("boxes")
+            .data(sumstat)
+            .enter()
+            .append("rect")
+                .attr("x", function(d){return(x(d.key)-boxWidth/2)})
+                .attr("y", function(d){return(y(d.value.q3))})
+                .attr("height", function(d){return(y(d.value.q1)-y(d.value.q3))})
+                .attr("width", boxWidth )
+                .attr("stroke", "black")
+                .style("fill", "#69b3a2")
+
+          // Show the median
+          svg
+            .selectAll("medianLines")
+            .data(sumstat)
+            .enter()
+            .append("line")
+              .attr("x1", function(d){return(x(d.key)-boxWidth/2) })
+              .attr("x2", function(d){return(x(d.key)+boxWidth/2) })
+              .attr("y1", function(d){return(y(d.value.median))})
+              .attr("y2", function(d){return(y(d.value.median))})
+              .attr("stroke", "black")
+              .style("width", 80)
+        })
+    }
+    
+    function renderDonut() {
+        // set the dimensions and margins of the graph
+        const width = 450,
+            height = 450,
+            margin = 40;
+
+        // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+        const radius = Math.min(width, height) / 2 - margin
+
+        // append the svg object to the div called 'my_dataviz'
+        const svg = d3.select("#donut")
+          .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+          .append("g")
+            .attr("transform", `translate(${width/2},${height/2})`);
+
+        // Create dummy data
+        const data = {a: 9, b: 20, c:30, d:8, e:12, f:3, g:7, h:14}
+
+        // set the color scale
+        const color = d3.scaleOrdinal()
+          .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
+          .range(d3.schemeDark2);
+
+        // Compute the position of each group on the pie:
+        const pie = d3.pie()
+          .sort(null) // Do not sort group by size
+          .value(d => d[1])
+        const data_ready = pie(Object.entries(data))
+
+        // The arc generator
+        const arc = d3.arc()
+          .innerRadius(radius * 0.5)         // This is the size of the donut hole
+          .outerRadius(radius * 0.8)
+
+        // Another arc that won't be drawn. Just for labels positioning
+        const outerArc = d3.arc()
+          .innerRadius(radius * 0.9)
+          .outerRadius(radius * 0.9)
+
+        // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+        svg
+          .selectAll('allSlices')
+          .data(data_ready)
+          .join('path')
+          .attr('d', arc)
+          .attr('fill', d => color(d.data[1]))
+          .attr("stroke", "white")
+          .style("stroke-width", "2px")
+          .style("opacity", 0.7)
+
+        // Add the polylines between chart and labels:
+        svg
+          .selectAll('allPolylines')
+          .data(data_ready)
+          .join('polyline')
+            .attr("stroke", "black")
+            .style("fill", "none")
+            .attr("stroke-width", 1)
+            .attr('points', function(d) {
+              const posA = arc.centroid(d) // line insertion in the slice
+              const posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
+              const posC = outerArc.centroid(d); // Label position = almost the same as posB
+              const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
+              posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+              return [posA, posB, posC]
+            })
+
+        // Add the polylines between chart and labels:
+        svg
+          .selectAll('allLabels')
+          .data(data_ready)
+          .join('text')
+            .text(d => d.data[0])
+            .attr('transform', function(d) {
+                const pos = outerArc.centroid(d);
+                const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
+                return `translate(${pos})`;
+            })
+            .style('text-anchor', function(d) {
+                const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                return (midangle < Math.PI ? 'start' : 'end')
+            })   
     }
     
     function renderScatterPlot() {
