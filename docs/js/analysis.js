@@ -201,7 +201,7 @@ window.addEventListener('load', () => {
         const data = {a: 9, b: 20, c:30, d:8, e:12, f:3, g:7, h:14}
 
         // set the color scale
-        const myColor = d3.scaleSequential()
+        const color = d3.scaleSequential()
             .domain([0,100])
             .interpolator(d3.interpolateViridis);
 
