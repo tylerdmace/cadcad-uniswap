@@ -182,7 +182,7 @@ window.addEventListener('load', () => {
         d3.select("#donut").select("svg").remove();
         
         // set the dimensions and margins of the graph
-        const width = 450,
+        const width = 500,
             height = 450,
             margin = 40;
 
@@ -198,7 +198,7 @@ window.addEventListener('load', () => {
             .attr("transform", `translate(${width/2},${height/2})`);
 
         // Create dummy data
-        const data = {One: 9, Two: 20, Three: 30, Four: 8, Five: 12, Six: 3, Seven: 7}
+        const data = {alpha: 9, beta: 20, gamma: 30, delta: 8, epsilon: 12, zeta: 3, eta: 7}
 
         // set the color scale
         const color = d3.scaleSequential()
