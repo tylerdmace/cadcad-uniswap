@@ -14,7 +14,7 @@
     height: 50px;
 }
 
-#plots {
+.plots {
     padding-top: 50px;
     display: flex;
     flex-direction: row;

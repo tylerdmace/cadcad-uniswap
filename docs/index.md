@@ -54,11 +54,13 @@ See implementation details [here](updates.md).
         </div>
     </div>
     <div id="spacer"></div>
-    <div id="scatter-plot"></div>
+    <div class="plots">
+        <div id="scatter-plot"></div>
+    </div>
     <p>As expected, higher retail tolerance values lead to higher returns for higher fee values, since more retail trades will be allowed. Similarly, lower retail precision values lead to higher returns, as more trades are considered arbitrage and the behavior of this agent causes the pool to always be brought to the <i>ideal</i> state. However, it's noticeable that this increase is more significant for lower retail tolerance values.</p>
     <p>Another important note is that higher fee values don't necessarily result in higher returns, as shown by the plot in the second column of the first row. This happens because, with low retail tolerance and a high number of retail trades, less of these trades are considered profitable. Therefore, we can conclude that, given the right system conditions, <strong>higher fees can make Uniswap less attractive to liquidity providers</strong>.</p>
     <p>Finally, it's important to state that retail_tolerance and retail_precision are both <strong>arbitrary parameters</strong> over which there is <strong>no control in a real system</strong>, created to possibilitate the development of the agents' behaviors and the trade classification mechanism and, as shown above, to allow hypotheses validation through parameter sweeping.</p>
-    <div id="plots">
+    <div class="plots">
         <div id="river-flow-rate"></div>
         <div id="reservoir-level"></div>
     </div>
@@ -68,7 +70,7 @@ See implementation details [here](updates.md).
       * If `retail_precision < 4`, then this swap would be classified as an arbitrage - in other words, we assume this swap is too precise for it to be plausible it would have been executed by a retail trader on the Uniswap UI, and therefore must have originated from an arbitrageur</p>
     <p>- **retail_tolerance**: In order for swaps observed in the historical data that are classified as retail trades to be replayed against the model, the effective price paid by the simulated agent must not be higher than the price observed in the historical data, factored by the `retail_tolerance` parameter. In other words, this determines the retail trader's tolerance (in %) to receive less money from an exchange made. For example, if in a certain exchange in Uniswap's real history **1 ETH** was sold for **250 DAI** and retail_tolerance is set at **0.05**, the model will replay the trade (sell 1 ETH) if given the state of the model the trader receives **237.5 DAI or more** for it. Otherwise, the trade will be disregarded in the simulation.</p>
     <p>Now, let's plot the calculated returns to analyze the sensitivity of the model to the parameters. The following script shows the plots dynamically as the number of parameters changes. The simulation made used two fee (**0.3% and 0.5%**), two retail_tolerance (**0.05% and 2.5%**) and two retail_precision (**3 and 15**) values.</p>
-    <div id="additional-plots">
+    <div class="plots">
         <div id=""></div>
         <div id=""></div>
     </div>
