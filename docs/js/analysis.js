@@ -63,12 +63,13 @@ window.addEventListener('load', () => {
         d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.csv").then(function(data) {
 
           // Get the different categories and count them
-          const categories = ["Almost Certainly", "Very Good Chance", "We Believe", "Likely", "About Even", "Little Chance", "Chances Are Slight", "Almost No Chance" ]
-          const n = categories.length
+          const categories = ["Almost Certainly", "Very Good Chance", "We Believe", "Likely", "About Even", "Little Chance", "Chances Are Slight", "Almost No Chance" ];
+          const n = categories.length;
 
           // Compute the mean of each group
-          let allMeans = []
-          for (i in categories){
+          let allMeans = [];
+          
+          for (let i in categories){
             currentGroup = categories[i]
             mean = d3.mean(data, function(d) { return +d[currentGroup] })
             allMeans.push(mean)
