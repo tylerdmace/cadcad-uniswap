@@ -91,6 +91,7 @@ window.addEventListener('load', () => {
 
           // Add X axis label:
           svg.append("text")
+              .attr("fill", "white")
               .attr("text-anchor", "end")
               .attr("x", width)
               .attr("y", height + 40)
