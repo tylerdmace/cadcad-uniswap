@@ -198,7 +198,7 @@ window.addEventListener('load', () => {
             .attr("transform", `translate(${width/2},${height/2})`);
 
         // Create dummy data
-        const data = {1: 9, 2: 20, 3: 30, 4: 8, 5: 12, 6: 3, 7: 7}
+        const data = {One: 9, Two: 20, Three: 30, Four: 8, Five: 12, Six: 3, Seven: 7}
 
         // set the color scale
         const color = d3.scaleSequential()
