@@ -198,7 +198,7 @@ window.addEventListener('load', () => {
             .attr("transform", `translate(${width/2},${height/2})`);
 
         // Create dummy data
-        const data = {a: 9, b: 20, c:30, d:8, e:12, f:3, g:7, h:14}
+        const data = {1: 9, 2: 20, 3:30, 4:8, 5:12, 6:3, 7:7}
 
         // set the color scale
         const color = d3.scaleOrdinal()
