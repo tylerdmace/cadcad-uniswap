@@ -94,6 +94,6 @@
     outline: 2px solid var(--md-primary-fg-color);
 }
 
-.md-main {
-    flex-grow: 2;
+.md-container {
+    flex-grow: 0;
 }
