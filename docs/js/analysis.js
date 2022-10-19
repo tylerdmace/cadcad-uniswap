@@ -70,8 +70,8 @@ window.addEventListener('load', () => {
           let allMeans = [];
           
           for (let i in categories){
-            currentGroup = categories[i]
-            mean = d3.mean(data, function(d) { return +d[currentGroup] })
+            let currentGroup = categories[i]
+            let mean = d3.mean(data, function(d) { return +d[currentGroup] })
             allMeans.push(mean)
           }
 
