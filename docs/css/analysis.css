@@ -95,5 +95,5 @@
 }
 
 .md-main {
-    flex-grow: 0;
+    flex-grow: unset;
 }
