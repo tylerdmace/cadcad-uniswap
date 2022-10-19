@@ -94,6 +94,6 @@
     outline: 2px solid var(--md-primary-fg-color);
 }
 
-.md-container {
-    flex-grow: 0;
+.md-footer {
+    display: none;
 }
