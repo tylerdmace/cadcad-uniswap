@@ -27,6 +27,7 @@ See implementation details [here](updates.md).
 
 ## Analysis
 <div id="analysis">
+    <div id="spacer" style="margin-top: 50px;"></div>
     <div id="controls">
         <div>
             <span>Currency Selection:</span>
