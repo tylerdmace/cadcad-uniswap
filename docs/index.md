@@ -74,7 +74,7 @@ See implementation details [here](updates.md).
              <li><strong>retail_tolerance</strong>: In order for swaps observed in the historical data that are classified as retail trades to be replayed against the model, the effective price paid by the simulated agent must not be higher than the price observed in the historical data, factored by the <em>retail_tolerance</em> parameter. In other words, this determines the retail trader's tolerance (in %) to receive less money from an exchange made. For example, if in a certain exchange in Uniswap's real history <strong>1 ETH</strong> was sold for <strong>250 DAI</strong> and retail_tolerance is set at <strong>0.05</strong>, the model will replay the trade (sell 1 ETH) if given the state of the model the trader receives <strong>237.5 DAI or more</strong> for it. Otherwise, the trade will be disregarded in the simulation.</li>
         </ul>
     </p>
-    <p>Now, let's plot the calculated returns to analyze the sensitivity of the model to the parameters. The following script shows the plots dynamically as the number of parameters changes. The simulation made used two fee (**0.3% and 0.5%**), two retail_tolerance (**0.05% and 2.5%**) and two retail_precision (**3 and 15**) values.</p>
+    <p>Now, let's plot the calculated returns to analyze the sensitivity of the model to the parameters. The following script shows the plots dynamically as the number of parameters changes. The simulation made used two fee (<strong>0.3%</strong> and <strong>0.5%</strong>), two retail_tolerance (<strong>0.05%</strong> and <strong>2.5%</strong>) and two retail_precision (<strong>3</strong> and <strong>15</strong>) values.</p>
     <div class="plots">
         <div id="donut"></div>
         <div id="scatter-plot"></div>
