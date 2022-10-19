@@ -198,11 +198,11 @@ window.addEventListener('load', () => {
             .attr("transform", `translate(${width/2},${height/2})`);
 
         // Create dummy data
-        const data = {1: 9, 2: 20, 3:30, 4:8, 5:12, 6:3, 7:7}
+        const data = {1: 9, 2: 20, 3: 30, 4: 8, 5: 12, 6: 3, 7: 7}
 
         // set the color scale
         const color = d3.scaleSequential()
-            .domain([0,100])
+            .domain([0,30])
             .interpolator(d3.interpolateViridis);
 
         // Compute the position of each group on the pie:
