@@ -202,7 +202,7 @@ window.addEventListener('load', () => {
 
         // set the color scale
         const color = d3.scaleOrdinal()
-            .range(d3.interpolateViridis);
+            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
         // Compute the position of each group on the pie:
         const pie = d3.pie()
