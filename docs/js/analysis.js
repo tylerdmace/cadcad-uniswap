@@ -42,75 +42,138 @@ window.addEventListener('load', () => {
         reserveSelectionDetails.innerHTML = reserve;
     }
     
-    function renderBoxplot() {
-        d3.select("#boxplot").select("svg").remove();
+    function renderRidgeline() {
+        d3.select("#ridgeline").select("svg").remove();
         
         // set the dimensions and margins of the graph
-        var margin = {top: 10, right: 30, bottom: 30, left: 40},
-          width = 400 - margin.left - margin.right,
-          height = 400 - margin.top - margin.bottom;
+        const margin = {top: 80, right: 30, bottom: 50, left:110},
+            width = 800 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
 
         // append the svg object to the body of the page
-        var svg = d3.select("#boxplot")
-        .append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-          .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
+        const svg = d3.select("#ridgeline")
+          .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform",
+                  `translate(${margin.left},${margin.top})`);
 
-        // create dummy data
-        var data = [12,19,11,13,12,22,13,4,15,16,18,19,20,12,11,9]
+        //read data
+        d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.csv").then(function(data) {
 
-        // Compute summary statistics used for the box:
-        var data_sorted = data.sort(d3.ascending)
-        var q1 = d3.quantile(data_sorted, .25)
-        var median = d3.quantile(data_sorted, .5)
-        var q3 = d3.quantile(data_sorted, .75)
-        var interQuantileRange = q3 - q1
-        var min = q1 - 1.5 * interQuantileRange
-        var max = q1 + 1.5 * interQuantileRange
+          // Get the different categories and count them
+          const categories = ["Almost Certainly", "Very Good Chance", "We Believe", "Likely", "About Even", "Little Chance", "Chances Are Slight", "Almost No Chance" ]
+          const n = categories.length
 
-        // Show the Y scale
-        var y = d3.scaleLinear()
-          .domain([0,24])
-          .range([height, 0]);
-        svg.call(d3.axisLeft(y))
+          // Compute the mean of each group
+          allMeans = []
+          for (i in categories){
+            currentGroup = categories[i]
+            mean = d3.mean(data, function(d) { return +d[currentGroup] })
+            allMeans.push(mean)
+          }
 
-        // a few features for the box
-        var center = 200
-        var width = 100
+          // Create a color scale using these means.
+          const myColor = d3.scaleSequential()
+            .domain([0,100])
+            .interpolator(d3.interpolateViridis);
 
-        // Show the main vertical line
-        svg
-        .append("line")
-          .attr("x1", center)
-          .attr("x2", center)
-          .attr("y1", y(min) )
-          .attr("y2", y(max) )
-          .attr("stroke", "black")
+          // Add X axis
+          const x = d3.scaleLinear()
+            .domain([-10, 120])
+            .range([ 0, 50 ]);
+          const xAxis = svg.append("g")
+            .attr("class", "xAxis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x).tickValues([0,25, 50, 75, 100]).tickSize(-height) )
 
-        // Show the box
-        svg
-        .append("rect")
-          .attr("x", center - width/2)
-          .attr("y", y(q3) )
-          .attr("height", (y(q1)-y(q3)) )
-          .attr("width", width )
-          .attr("stroke", "black")
-          .style("fill", "#69b3a2")
+          // Add X axis label:
+          svg.append("text")
+              .attr("text-anchor", "end")
+              .attr("x", width)
+              .attr("y", height + 40)
+              .text("Probability (%)");
 
-        // show median, min and max horizontal lines
-        svg
-        .selectAll("toto")
-        .data([min, median, max])
-        .enter()
-        .append("line")
-          .attr("x1", center-width/2)
-          .attr("x2", center+width/2)
-          .attr("y1", function(d){ return(y(d))} )
-          .attr("y2", function(d){ return(y(d))} )
-          .attr("stroke", "black")
+          // Create a Y scale for densities
+          const y = d3.scaleLinear()
+            .domain([0, 0.25])
+            .range([ height, 0]);
+
+          // Create the Y axis for names
+          const yName = d3.scaleBand()
+            .domain(categories)
+            .range([0, height])
+            .paddingInner(1)
+          svg.append("g")
+            .call(d3.axisLeft(yName).tickSize(0))
+            .select(".domain").remove()
+
+          // Compute kernel density estimation for each column:
+          const kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40)) // increase this 40 for more accurate density.
+          const allDensity = []
+          for (i = 0; i < n; i++) {
+              key = categories[i]
+              density = kde( data.map(function(d){  return d[key]; }) )
+              allDensity.push({key: key, density: density})
+          }
+
+          // Add areas
+          const myCurves = svg.selectAll("areas")
+            .data(allDensity)
+            .join("path")
+              .attr("class", "myCurves")
+              .attr("transform", function(d){return(`translate(0, ${(yName(d.key)-height)})`)})
+              .attr("fill", function(d){
+                grp = d.key ;
+                index = categories.indexOf(grp)
+                value = allMeans[index]
+                return myColor( value  )
+              })
+              .datum(function(d){return(d.density)})
+              .attr("opacity", 0.7)
+              .attr("stroke", "#000")
+              .attr("stroke-width", 0.1)
+              .attr("d",  d3.line()
+                  .curve(d3.curveBasis)
+                  .x(function(d) { return x(0); })
+                  .y(function(d) { return y(d[1]); })
+              )
+
+          // Animate X axis apparition
+          x.range([ 0, width ]);
+          xAxis
+            .transition()
+            .duration(5000)
+            .call(d3.axisBottom(x).tickValues([0,25, 50, 75, 100]).tickSize(-height) )
+            .select(".domain").remove()
+
+          // Animate densities apparition
+          myCurves
+            .transition()
+            .duration(5000)
+            .attr("d",  d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) { return x(d[0]); })
+                .y(function(d) { return y(d[1]); })
+            )
+
+        })
+
+        // This is what I need to compute kernel density estimation
+        function kernelDensityEstimator(kernel, X) {
+          return function(V) {
+            return X.map(function(x) {
+              return [x, d3.mean(V, function(v) { return kernel(x - v); })];
+            });
+          };
+        }
+
+        function kernelEpanechnikov(k) {
+          return function(v) {
+            return Math.abs(v /= k) <= 1 ? 0.75 * (1 - v * v) / k : 0;
+          };
+        }
     }
     
     function renderDonut() {
@@ -190,6 +253,7 @@ window.addEventListener('load', () => {
           .data(data_ready)
           .join('text')
             .text(d => d.data[0])
+            .attr("stroke", "white")
             .attr('transform', function(d) {
                 const pos = outerArc.centroid(d);
                 const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
@@ -207,7 +271,7 @@ window.addEventListener('load', () => {
         
         // set the dimensions and margins of the graph
         const margin = {top: 10, right: 30, bottom: 30, left: 60},
-                width = 800 - margin.left - margin.right,
+                width = 460 - margin.left - margin.right,
                 height = 400 - margin.top - margin.bottom;
 
         // append the svg object to the body of the page

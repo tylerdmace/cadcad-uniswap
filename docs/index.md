@@ -55,7 +55,7 @@ See implementation details [here](updates.md).
     </div>
     <div id="spacer"></div>
     <div class="plots">
-        <div id="scatter-plot"></div>
+        <div id="ridgeline"></div>
     </div>
     <p>As expected, higher retail tolerance values lead to higher returns for higher fee values, since more retail trades will be allowed. Similarly, lower retail precision values lead to higher returns, as more trades are considered arbitrage and the behavior of this agent causes the pool to always be brought to the <i>ideal</i> state. However, it's noticeable that this increase is more significant for lower retail tolerance values.</p>
     <p>Another important note is that higher fee values don't necessarily result in higher returns, as shown by the plot in the second column of the first row. This happens because, with low retail tolerance and a high number of retail trades, less of these trades are considered profitable. Therefore, we can conclude that, given the right system conditions, <strong>higher fees can make Uniswap less attractive to liquidity providers</strong>.</p>
@@ -72,6 +72,6 @@ See implementation details [here](updates.md).
     <p>Now, let's plot the calculated returns to analyze the sensitivity of the model to the parameters. The following script shows the plots dynamically as the number of parameters changes. The simulation made used two fee (**0.3% and 0.5%**), two retail_tolerance (**0.05% and 2.5%**) and two retail_precision (**3 and 15**) values.</p>
     <div class="plots">
         <div id="donut"></div>
-        <div id="boxplot"></div>
+        <div id="scatter-plot"></div>
     </div>
 </div>
