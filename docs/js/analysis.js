@@ -43,6 +43,8 @@ window.addEventListener('load', () => {
     }
     
     function renderBoxplot() {
+        d3.select("#boxplot").select("svg").remove();
+        
         // set the dimensions and margins of the graph
         var margin = {top: 10, right: 30, bottom: 30, left: 40},
             width = 460 - margin.left - margin.right,
@@ -133,6 +135,8 @@ window.addEventListener('load', () => {
     }
     
     function renderDonut() {
+        d3.select("#donut").select("svg").remove();
+        
         // set the dimensions and margins of the graph
         const width = 450,
             height = 450,
@@ -189,7 +193,7 @@ window.addEventListener('load', () => {
           .selectAll('allPolylines')
           .data(data_ready)
           .join('polyline')
-            .attr("stroke", "black")
+            .attr("stroke", "white")
             .style("fill", "none")
             .attr("stroke-width", 1)
             .attr('points', function(d) {
