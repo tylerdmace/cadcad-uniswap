@@ -33,7 +33,7 @@ window.addEventListener('load', () => {
         renderReservoirLevel(reserve);
         renderScatterPlot();
         renderDonut();
-        renderBoxplot();
+        renderRidgeline();
     }
     
     function setDefaults() {
@@ -253,7 +253,7 @@ window.addEventListener('load', () => {
           .data(data_ready)
           .join('text')
             .text(d => d.data[0])
-            .attr("stroke", "white")
+            .attr("fill", "white")
             .attr('transform', function(d) {
                 const pos = outerArc.centroid(d);
                 const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
