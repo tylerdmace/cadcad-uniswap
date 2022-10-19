@@ -27,7 +27,7 @@ See implementation details [here](updates.md).
 
 ## Analysis
 <div id="analysis">
-    <div id="spacer" style="margin-top: 50px;"></div>
+    <div class="spacer"></div>
     <div id="controls">
         <div>
             <span>Currency Selection:</span>
@@ -54,7 +54,7 @@ See implementation details [here](updates.md).
             </div>
         </div>
     </div>
-    <div id="spacer"></div>
+    <div class="spacer"></div>
     <div class="plots">
         <div id="ridgeline"></div>
     </div>

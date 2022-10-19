@@ -9,9 +9,10 @@
     justify-content: space-evenly;
 }
 
-#spacer {
+.spacer {
+    margin-top: 50px;
+    margin-bottom: 50px;
     border-bottom: 2px solid var(--md-primary-fg-color);
-    height: 50px;
 }
 
 .plots {
