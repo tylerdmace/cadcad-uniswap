@@ -97,3 +97,7 @@
 .md-footer {
     display: none;
 }
+
+.md-container, .md-main {
+    flex-grow: 0;
+}
