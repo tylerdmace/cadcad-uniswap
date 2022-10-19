@@ -112,10 +112,10 @@ window.addEventListener('load', () => {
 
           // Compute kernel density estimation for each column:
           const kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40)) // increase this 40 for more accurate density.
-          const allDensity = []
-          for (i = 0; i < n; i++) {
-              key = categories[i]
-              density = kde( data.map(function(d){  return d[key]; }) )
+          let allDensity = []
+          for (let i = 0; i < n; i++) {
+              let key = categories[i]
+              let density = kde( data.map(function(d){  return d[key]; }) )
               allDensity.push({key: key, density: density})
           }
 
