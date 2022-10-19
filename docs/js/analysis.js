@@ -201,9 +201,9 @@ window.addEventListener('load', () => {
         const data = {a: 9, b: 20, c:30, d:8, e:12, f:3, g:7, h:14}
 
         // set the color scale
-        const color = d3.scaleOrdinal()
-          .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
-          .range(d3.schemeDark2);
+        const myColor = d3.scaleSequential()
+            .domain([0,100])
+            .interpolator(d3.interpolateViridis);
 
         // Compute the position of each group on the pie:
         const pie = d3.pie()
