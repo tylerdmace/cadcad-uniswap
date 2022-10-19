@@ -126,9 +126,9 @@ window.addEventListener('load', () => {
               .attr("class", "myCurves")
               .attr("transform", function(d){return(`translate(0, ${(yName(d.key)-height)})`)})
               .attr("fill", function(d){
-                grp = d.key ;
-                index = categories.indexOf(grp)
-                value = allMeans[index]
+                let grp = d.key ;
+                let index = categories.indexOf(grp)
+                let value = allMeans[index]
                 return myColor( value  )
               })
               .datum(function(d){return(d.density)})
